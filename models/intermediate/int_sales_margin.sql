@@ -5,14 +5,14 @@
 -- purchase_cost = quantity * purchase_price
 
 select
-p.purchase_price
-p.purchase_price*q.quantity as purchase_cost
-r.revenue-purchase_cost as sales_margin 
+p.purchase_price,
+p.purchase_price*q.quantity as purchase_cost,
+r.revenue-(p.purchase_price*q.quantity) as sales_margin 
 from
  {{ref("stg_raw__product")}} p 
 join
  {{ref("stg_raw__sales")}} q
- on (products_id)
+ on (p.products_id=q.products_id)
  join
  {{ref("stg_raw__sales", )}} r
- on (products_id)
+ on (p.products_id=r.products_id)
