@@ -1,20 +1,12 @@
--- Where is the data about quantity? product 
--- Where is the data about purchase_price? product 
--- Where is the data about revenue? sales 
--- margin = revenue - purchase_cost
--- purchase_cost = quantity * purchase_price
-
-select
-q.date_date, 
-r.orders_id,
-r.products_id,
-p.purchase_price*q.quantity as purchase_cost,
-round((r.revenue-(p.purchase_price*q.quantity)),2) as sales_margin 
-from
- {{ref("stg_raw__product")}} p 
-join
- {{ref("stg_raw__sales")}} q
- on (p.products_id=q.products_id)
- join
- {{ref("stg_raw__sales", )}} r
- on (p.products_id=r.products_id)
+  SELECT
+      products_id,
+      date_date,
+      orders_id,
+      revenue,
+      quantity,
+      purchase_price,
+      ROUND(s.quantity*p.purchase_price,2) AS purchase_cost,
+      ROUND(s.revenue - s.quantity*p.purchase_price, 2) AS margin
+  FROM {{ref("stg_raw__sales")}} s
+  LEFT JOIN {{ref("stg_raw__product")}} p
+      USING (products_id)
