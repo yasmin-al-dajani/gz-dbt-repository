@@ -8,8 +8,6 @@
 --Total log costs
 --Total quantity of products sold.--
 
- {{ config(materialized='view') }}
-
  SELECT
      date_date
      ,COUNT(orders_id) AS nb_transactions
