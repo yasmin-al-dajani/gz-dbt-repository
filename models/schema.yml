@@ -47,4 +47,3 @@ sources:
             description: the logistical cost of the order 
           - name: ship_cost
             description: the shipping cost of the order 
-
