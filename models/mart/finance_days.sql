@@ -8,7 +8,7 @@
 --Total log costs
 --Total quantity of products sold.--
 
- {{ config(materialized='table') }}
+ {{ config(materialized='view') }}
 
  SELECT
      date_date
